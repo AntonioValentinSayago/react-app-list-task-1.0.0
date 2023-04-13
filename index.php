@@ -1,6 +1,13 @@
 <?php
-require_once 'controller/InventoryController.php';
+require_once 'controller/PlantillaController.php';
+require_once 'controller/UsuarioController.php';
 
 
-$usuarioController = new InventoryModelo();
-$usuarioController->getProductosInventory();
+require_once 'model/UsuarioModelo.php';
+
+$ctlUsuario = new UsuarioController();
+$ctlUsuario->mostrarUsuarios();
+
+
+$ctlPlantilla = new ControladorPlantilla();
+$ctlPlantilla->ctrPlantilla();

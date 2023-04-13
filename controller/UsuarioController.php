@@ -1,8 +1,7 @@
 <?php
 
-require_once 'model/UsuarioModelo.php';
-require_once 'model/ConfigBDModelo.php';
-require_once 'config/db_config.php';
+require_once 'D:\Programacion\GitRepository\lavanderiaSapito\model\ConfigBDModelo.php';
+require_once 'D:\Programacion\GitRepository\lavanderiaSapito\config\db_config.php';
 class UsuarioController
 {
     private $modelo;
@@ -33,6 +32,6 @@ class UsuarioController
         $conexion->close();
 
         // Cargar la vista y pasar los datos de los usuarios
-        require_once 'views/usuarios.php';
+        require_once 'D:\Programacion\GitRepository\lavanderiaSapito\views\modulos\usuarios.php';
     }
 }
