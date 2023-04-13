@@ -1,8 +1,8 @@
 <?php
 
-require_once '../model/InventoryModelo.php';
-require_once '../model/ConfigBDModelo.php';
-require_once '../config/db_config.php';
+require_once 'model/InventoryModelo.php';
+require_once 'model/ConfigBDModelo.php';
+require_once 'config/db_config.php';
 
 class InventoryModelo
 {
@@ -21,7 +21,6 @@ class InventoryModelo
 
         $productsInventory = array();
 
-
         /* A SQL query that selects all columns from the "inventario" table, and then executes the
         query using the database connection stored in the variable ``. The result of the
         query is stored in the variable ``. */
@@ -30,15 +29,15 @@ class InventoryModelo
 
         // Recorrer los resultados y crear objetos Usuario
         while ($fila = $getSelectProductsInventory->fetch_assoc()) {
-            $usuario = new ProductsInventory($fila['nombreProducto'], $fila['cantidadProducto'], $fila['descripcion'], $fila['estatus'], $fila['fecha_creacion'], $fila['codigoIn']);
-            $usuarios[] = $usuario;
+            $getProductsBd = new ProductsInventory($fila['idInventario'], $fila['codigoIn'], $fila['nombreProducto'], $fila['descripcion'], $fila['cantidadProducto'], $fila['fecha_creacion']);
+            $productsInventory[] = $getProductsBd;
         }
 
         // Cerrar la conexión a la base de datos
         $conexion->close();
 
         // Cargar la vista y pasar los datos de los usuarios
-        require_once 'views/usuarios.php';
+        require_once 'views/InventoryView.php';
 
 
     }

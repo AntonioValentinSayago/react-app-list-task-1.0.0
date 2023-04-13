@@ -1,5 +1,6 @@
 <?php
-require_once 'controller/UsuarioController.php';
+require_once 'controller/InventoryController.php';
 
-$usuarioController = new UsuarioController();
-$usuarioController->mostrarUsuarios();
+
+$usuarioController = new InventoryModelo();
+$usuarioController->getProductosInventory();

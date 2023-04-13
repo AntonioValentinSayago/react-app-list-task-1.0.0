@@ -32,9 +32,17 @@
     <!-- Template Main CSS File -->
     <link href="assets/css/style.css" rel="stylesheet">
 
+    <script src="
+https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.all.min.js
+"></script>
+<link href="
+https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.min.css
+" rel="stylesheet">
+
 </head>
 
 <body>
+    
     <!-- ======= Header ======= -->
     <header id="header" class="header fixed-top d-flex align-items-center">
 
@@ -95,33 +103,35 @@
         </nav><!-- End Icons Navigation -->
 
     </header><!-- End Header -->
+
     <!-- ======= Sidebar ======= -->
     <aside id="sidebar" class="sidebar">
 
         <ul class="sidebar-nav" id="sidebar-nav">
 
             <li class="nav-item">
-                <a class="nav-link " href="index.php">
+                <a class="nav-link collapsed" href="index.php">
                     <i class="bi bi-grid"></i>
                     <span>Panel Principal</span>
                 </a>
             </li><!-- End Dashboard Nav -->
 
             <li class="nav-item">
-                <a class="nav-link collapsed" href="views/InventoryView.php">
+                <a class="nav-link" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
                     <i class="bi bi-menu-button-wide"></i><span>Inventario</span>
                 </a>
             </li><!-- End Components Nav -->
 
 
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#">
+                <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
                     <i class="bi bi-layout-text-window-reverse"></i><span>Reportes</span>
                 </a>
             </li><!-- End Tables Nav -->
 
             <li class="nav-item">
-                <a class="nav-link collapsed" href="gastosGenerales.html">
+                <a class="nav-link collapsed" data-bs-target="#charts-nav" data-bs-toggle="collapse"
+                    href="gastosGenerales.php">
                     <i class="bi bi-bar-chart"></i><span>Gastos Generales</span>
                 </a>
             </li><!-- End Charts Nav -->
@@ -135,6 +145,13 @@
             </li><!-- End Profile Page Nav -->
 
             <li class="nav-item">
+        <a class="nav-link collapsed" href="clientes.php">
+        <i class="bi bi-person-add"></i>
+          <span>Empleados</span>
+        </a>
+      </li><!-- End Profile Page Nav -->
+
+            <li class="nav-item">
                 <a class="nav-link collapsed" href="pages-faq.html">
                     <i class="bi bi-question-circle"></i>
                     <span>Manual de Usuario</span>
@@ -146,6 +163,7 @@
     </aside><!-- End Sidebar-->
 
     <main id="main" class="main">
+
         <div class="pagetitle" style="display: flex;">
             <h1>Panel Principal</h1>
             <nav>
@@ -155,71 +173,93 @@
                 </ol>
             </nav>
             <div style="margin-left: auto;">
-                <button type="button" class="btn btn-primary btn-add"><i class="bi bi-plus me-1"></i>Cliente</button>
-                <button type="button" class="btn btn-primary btn-add"><i class="bi bi-plus me-1"></i>Nota</button>
+                <a href="nuevoInventario.php"><button type="button" class="btn btn-primary btn-add"><i class="bi bi-plus me-1"></i>Producto</button></a>
+                <a href="pdf/inventario.php" target="_target"><button type="button" class="btn btn-danger"><i class="bi bi-filetype-pdf"></i> Generar Reporte</button></a>
             </div>
         </div><!-- End Page Title -->
 
-        <section class="section dasboard">
+        <!--Inicio del Section Principal-->
+        <section class="section dashboard">
             <div class="row">
+
+                <!-- Left side columns -->
                 <div class="col-lg-12">
                     <div class="row">
+
+                        <!-- Recent Sales -->
                         <div class="col-12">
                             <div class="card recent-sales overflow-auto">
+
                                 <div class="card-body">
-                                    <h5 class="card-title">Registro de Notas </h5>
-                                    <table class="table table-borderless datatable" id="example">
+                                    <h5 class="card-title">Control de Inventario </h5>
+
+                                    <table class="table table-borderless datatable">
                                         <thead>
                                             <tr>
-                                                <th scope="col">Folio de Nota</th>
-                                                <th scope="col">Fecha Entrega</th>
-                                                <th scope="col">Saldo</th>
-                                                <th scope="col">Deuda</th>
-                                                <th scope="col">Total</th>
+                                                <th scope="col">#</th>
+                                                <th scope="col">Código</th>
+                                                <th scope="col">Producto</th>
+                                                <th scope="col">Descripcion</th>
+                                                <th scope="col">Existencias</th>
+                                                <th scope="col">Etatus</th>
+                                                <th scope="col">Acciones</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <?php foreach ($usuarios as $usuario): ?>
+                                            <?php foreach ($productsInventory as $usuario): ?>
                                                 <tr>
+                                                    <th scope="row"><?php echo $usuario->getIdInventory(); ?></th>
+                                                    <th scope="row"><?php echo $usuario->getCodigoProduct(); ?></th>
+                                                    <td><?php echo $usuario->getNameProduct(); ?></td>
+                                                    <td><?php echo $usuario->getDescription(); ?></td>
+                                                    <td><?php echo $usuario->getExistsProduct(); ?></td>
                                                     <td>
-                                                        <?php echo $usuario->getId(); ?>
+                                                        <?php 
+                                                            if($usuario->getExistsProduct() >= 10)
+                                                            {
+                                                               ?><span class="badge bg-success">Disponible</span> <?php
+                                                            }
+                                                            if($usuario->getExistsProduct() <= 9)
+                                                            {
+                                                                ?><span class="badge bg-danger">Pocas Existencias</span> <?php
+                                                            }
+                                                            
+                                                        ?>                        
                                                     </td>
                                                     <td>
-                                                        <?php echo $usuario->getNombre(); ?>
-                                                    </td>
-                                                    <td>
-                                                        <?php echo $usuario->getEmail(); ?>
-                                                    </td>
-                                                    <td>
-                                                        <?php echo $usuario->getDineroCuenta(); ?>
-                                                    </td>
-                                                    <td>
-                                                        <?php echo $usuario->getTotalPagar(); ?>
+                                                        <span class="badge bg-warning" onclick="example()"><i class="bi bi-pencil-square"></i> </span>
+                                                        <span class="badge bg-danger" onclick="example()" style="cursor:pointer;"><i class="bi bi-trash-fill"></i> </span>
                                                     </td>
                                                 </tr>
-                                            <?php endforeach; ?>
+                                                <?php endforeach; ?>
                                         </tbody>
                                     </table>
+
                                 </div>
+
                             </div>
-                        </div>
+                        </div><!-- End Recent Sales -->
+
                     </div>
-                </div>
+                </div><!-- End Left side columns -->
+
             </div>
         </section>
 
-    </main><!-- End -->
+    </main><!-- End #main -->
 
+    <script>
+        function example()
+        {
+            Swal.fire({
+                icon: 'error',
+                title: 'System Error',
+                text: 'Intentar más tarde'
+            })
 
-    <!-- ======= Footer ======= -->
-    <footer id="footer" class="footer">
-        <div class="copyright">
-            &copy; Copyright <strong><span>Lavanderia_Sapito</span></strong>. All Rights Reserved
-        </div>
-        <div class="credits">
-            Designed by <a href="https://bootstrapmade.com/">Lavandera Sapito </a>
-        </div>
-    </footer><!-- End Footer -->
+        }
+    </script>
+
 
     <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
             class="bi bi-arrow-up-short"></i></a>
