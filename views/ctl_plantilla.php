@@ -36,13 +36,37 @@
 
 <body>
     <!-- ======= Header Routes======= -->
+    <?php include "modulos/header.php"; ?>
+    <!-- ======= END Header Routes======= -->
 
+    <!-- ======= Header Routes======= -->
+    <?php include "modulos/menu.php"; ?>
+    <!-- ======= END Header Routes======= -->
 
+    <!-- ======= Contenido======= -->
     <?php
-        include "modulos/usuarios.php";
-    ?>
-  
 
+    if (isset($_GET["ruta"]))
+    {
+        # code...
+        if ($_GET["ruta"] == "usuarios" ||
+           $_GET["ruta"] == "InventoryView")
+        {
+            # code...
+            include "modulos/".$_GET["ruta"].".php";
+        } else 
+        {
+            include "modulos/404.php";
+        }
+    }
+
+    ?>
+
+    <!-- ======= End Contenido======= -->
+
+    <!-- ======= Header Routes======= -->
+    <?php include "modulos/footer.php"; ?>
+    <!-- ======= END Header Routes======= -->
 
     <!-- ======= Header Routes======= -->
 

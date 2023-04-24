@@ -1,8 +1,8 @@
 <?php
 
-require_once 'model/InventoryModelo.php';
-require_once 'model/ConfigBDModelo.php';
-require_once 'config/db_config.php';
+require_once 'D:\Programacion\GitRepository\lavanderiaSapito\model\InventoryModelo.php';
+require_once 'D:\Programacion\GitRepository\lavanderiaSapito\model\ConfigBDModelo.php';
+require_once 'D:\Programacion\GitRepository\lavanderiaSapito\config\db_config.php';
 
 class InventoryModelo
 {
@@ -37,7 +37,7 @@ class InventoryModelo
         $conexion->close();
 
         // Cargar la vista y pasar los datos de los usuarios
-        require_once 'views/InventoryView.php';
+        require_once 'D:\Programacion\GitRepository\lavanderiaSapito\views\modulos\InventoryView.php';
 
 
     }
