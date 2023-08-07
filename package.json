@@ -1,0 +1,23 @@
+{
+  "name": "03-aplicacion-consola",
+  "version": "1.0.0",
+  "description": "El servicio sistema de venta \"lavanderia sapito\" se encuentra a migración a la arquitectura MVC con PHP en la reciente versión",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AntonioValentinSayago/node-js-aplicacion-consola-interactiva.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AntonioValentinSayago/node-js-aplicacion-consola-interactiva/issues"
+  },
+  "homepage": "https://github.com/AntonioValentinSayago/node-js-aplicacion-consola-interactiva#readme",
+  "dependencies": {
+    "colors": "^1.4.0"
+  }
+}
