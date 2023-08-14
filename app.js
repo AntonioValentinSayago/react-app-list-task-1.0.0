@@ -1,8 +1,10 @@
-const { inquireMenu, pausa, leerInput } = require('./helpers/inquirer');
-const Tareas = require('./models/Tareas');
-const Tarea = require('./models/tarea');
-
 require('colors')
+const { guardarDB, leerDB } = require('./helpers/guardarArchivo');
+const { inquirerMenu,
+         pausa, 
+         leerInput } = require('./helpers/inquirer');
+const Tareas = require('./models/tareas');
+
 
 console.clear();
 
@@ -13,25 +15,26 @@ const main = async() => {
 
     do {
         
-        opt = await inquireMenu();
+        opt = await inquirerMenu();
 
         switch (opt) {
             case '1':
-                // Crear Opción
-                const desc = await leerInput('Descripción: ');
-                console.log(desc);
+                 // crear opcion
+                 const desc = await leerInput('Descripción:');
+                 tareas.crearTarea( desc );
 
             break;
             case '2':
-                console.log(tareas.__Listado);
+                console.log(tareas.ListadoArr);
             break;
         
         }
+
+        //guardarDB( tareas.listadoArr )
 
         await pausa();
 
     } while (opt != '0');
 }
-
 
 main();
